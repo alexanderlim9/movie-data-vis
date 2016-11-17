@@ -9,12 +9,15 @@ import java.io.IOException;
 
     public class Parser {
 
+        // Code adapted from source: https://www.mkyong.com/java/how-to-export-data-to-csv-file-java/
         public static void main(String[] args) {
 
-            String csvFile = "/Users/alex/Documents/Fall16/ProgrammingBasics/pbfinal/movieData/movies.csv";
+            String csvFile = "/Users/alex/Documents/repositories/MovieDataParser/pbfinal/movieData/movies.csv";
             BufferedReader br = null;
             String line = "";
             String csvSplitBy = ",";
+            int yearMin = 2017;
+            int yearSpan;
 
             try {
 
@@ -30,21 +33,23 @@ import java.io.IOException;
                         String year = entry[1].substring(titleLength - 5, titleLength-1);
                         try {
 //                            System.out.println(Integer.valueOf(year));
-                            line += ","+ Integer.valueOf(year);
+                            int yearInt = Integer.valueOf(year);
+                            line += ","+ yearInt;
+                            yearMin = Math.min(yearInt, yearMin);
 
+//                            entry[1] = entry[1].replace(year,"");
+//                            entry[1] = entry[1].substring(titleLength-5);
                         } catch (NumberFormatException e) {
 //                            System.out.println("N/A");
                             line += ",N/A ";
                         }
-
                     }
-//                    System.out.println("Entry  " + entries[4] + " , name=" + entries[5] + "]");
-//                    if (entries.length != 3) {
-//                        counter++;
-//                    }
                     System.out.println(line);
                 }
+                yearSpan = 2016 - yearMin;
 //                System.out.println(counter);
+                System.out.println(yearMin);
+                System.out.println(yearSpan);
 
 
             } catch (FileNotFoundException e) {
@@ -62,6 +67,16 @@ import java.io.IOException;
             }
 
         }
+
+        /**
+         * Given an array of data, translates genres from strings to string-boolean values.
+         * i.e. isActionMovie will store a value of 0 if the movie is not an action movie
+         *
+         * @param entry an array of a given movie entry
+         */
+//        public void translateGenre(String[] entry) {
+//
+//        }
 
 
 }
