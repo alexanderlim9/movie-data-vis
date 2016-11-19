@@ -38,15 +38,11 @@ public class Merge {
             while ((line2 = br2.readLine()) != null) {
                 // use comma as separator
                 String[] entry = line2.split(csvSplitBy);
-                try {
-                    line2 += "," + ratingMap.get(entry[0]);
-                } catch (NullPointerException e) {
-                    line2 += ",";
-                }
-//                System.out.println(line2);
+
+                line2 += "," + ratingMap.getOrDefault(entry[0], "N/A");
+
+                System.out.println(line2);
             }
-
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -41,7 +41,7 @@ import java.io.IOException;
 //                            entry[1] = entry[1].substring(titleLength-5);
                         } catch (NumberFormatException e) {
 //                            System.out.println("N/A");
-                            line += ",N/A ";
+                            line += ",N/A";
                         }
                     }
                     System.out.println(line);
