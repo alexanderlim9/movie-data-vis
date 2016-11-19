@@ -22,7 +22,6 @@ public class RatingCalculator {
         float averageRating = 0;
 
         try {
-
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
                 // use comma as separator
@@ -35,9 +34,11 @@ public class RatingCalculator {
                     } else {
                         // calculate average rating of movie
                         averageRating = sumRatings / numRatings;
-                        System.out.print("MovieID: " + movieID + ", ");
-                        System.out.print("Average Rating: " + averageRating + ", ");
-                        System.out.println("Number of Reviews: " + numRatings + ". ");
+//                        System.out.print("MovieID: " + movieID + ", ");
+//                        System.out.print("Average Rating: " + averageRating + ", ");
+//                        System.out.println("Number of Reviews: " + numRatings + ". ");
+
+                        System.out.println(movieID + "," + averageRating + "," + numRatings);
 
                         // begin new calculation by resetting values
                         sumRatings = Integer.valueOf(entry[2]);
