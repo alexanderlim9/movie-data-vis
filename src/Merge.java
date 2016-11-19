@@ -18,20 +18,20 @@ public class Merge {
         String line2 = "";
         String csvSplitBy = ",";
 
-        HashMap<Integer, Integer> ratingMap = new HashMap<Integer, Integer>();
+//        HashMap<Integer, Integer> ratingMap = new HashMap<Integer, Integer>();
+        HashMap<String, String> ratingMap = new HashMap<String, String>();
 
         try {
             br = new BufferedReader(new FileReader(ratingsFile));
             while ((line = br.readLine()) != null) {
                 // use comma as separator
-                String[] entry = line.split(csvSplitBy);
                 try {
-                    // still calculating for the same movie
-                    ratingMap.put(Integer.valueOf(entry[0]), Integer.valueOf(entry[1]));
+                    String[] entry = line.split(csvSplitBy);
+//                    ratingMap.put(Integer.valueOf(entry[0]), Integer.valueOf(entry[1]));
+                    ratingMap.put(entry[0], entry[1]);
                 } catch (NumberFormatException e) {
 //                    System.out.println(line);
                 }
-//                System.out.println(line);
             }
 
             br2 = new BufferedReader(new FileReader(moviesFile));
@@ -43,7 +43,7 @@ public class Merge {
                 } catch (NullPointerException e) {
                     line2 += ",";
                 }
-                System.out.println(line2);
+//                System.out.println(line2);
             }
 
 
