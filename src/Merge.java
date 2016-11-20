@@ -28,7 +28,7 @@ public class Merge {
                 try {
                     String[] entry = line.split(csvSplitBy);
 //                    ratingMap.put(Integer.valueOf(entry[0]), Integer.valueOf(entry[1]));
-                    ratingMap.put(entry[0], entry[1]);
+                    ratingMap.put(entry[0], entry[1] + "," + entry[2]);
                 } catch (NumberFormatException e) {
 //                    System.out.println(line);
                 }
@@ -39,7 +39,7 @@ public class Merge {
                 // use comma as separator
                 String[] entry = line2.split(csvSplitBy);
 
-                line2 += "," + ratingMap.getOrDefault(entry[0], "N/A");
+                line2 += "," + ratingMap.getOrDefault(entry[0], "N/A,N/A");
 
                 System.out.println(line2);
             }
