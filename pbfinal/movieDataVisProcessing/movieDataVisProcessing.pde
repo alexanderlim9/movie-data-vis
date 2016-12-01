@@ -6,11 +6,14 @@ boolean sortYear;
 int sortView = 0;
 FrameInfo frameInfo = new FrameInfo();
 
+HashMap<Integer, Integer> moviesByYear;
+
 void setup() {
-  size(1200, 800);
+  //size(1200, 800);
+  fullScreen();
   background(255);
   movies = loadTable("parsedMovieData.csv", "header");
-
+  moviesByYear = Calculate.moviesByYear(movies);
   sortYear = true;
   //sortView = 3;
 
@@ -25,7 +28,7 @@ void setup() {
     int y = row.getInt("year");
     float rating = row.getFloat("rating");
     int numParticipants = row.getInt("numParticipants");
-    //int numMovies = movies.getRowCount();
+    int numMovies = movies.getRowCount();
     
     //println(y);
     fill(0, 20);
@@ -33,9 +36,11 @@ void setup() {
     
     float yearX = (y-1916)*width/100;
     
+    
     switch (Math.abs(sortView % 4)) {
-      case 0: ellipse(yearX, random(height), width/100, width/100);
+      case 0: ellipse(yearX, random(height-40), width/100, width/100);
         //saveFrame("moviesVis1.JPG");
+        println(y);
         break;
 
       case 1: 
@@ -43,7 +48,7 @@ void setup() {
         pushStyle();
         //fill(150+rating*10, 100+rating*20, 150);
         fill(0, rating*20);
-        ellipse(yearX, random(height), width/100, width/100);
+        ellipse(yearX, random(height-40), width/100, width/100);
         popStyle();
         //saveFrame("moviesVis2.JPG");
         break;
@@ -52,7 +57,7 @@ void setup() {
         pushStyle();
         //fill(150+rating*10, 100+rating*20, 150);
         fill(0, 20);
-        ellipse(yearX, random(height), numParticipants, numParticipants);
+        ellipse(yearX, random(height-40), numParticipants, numParticipants);
         popStyle();
         //saveFrame("moviesVis3.JPG");
         break;
@@ -60,10 +65,14 @@ void setup() {
       case 3:
         pushStyle();
         //fill(150+rating*10, 100+rating*20, 150);
-        fill(0, 20);
-        rect(yearX, height-numParticipants, numParticipants/10, numParticipants);
+        fill(200);
+        pushMatrix();
+        translate(0, -40);
+        rect(yearX, height-moviesByYear.get(y)*1.5, width/110, moviesByYear.get(y)*1.5);
+        
+        popMatrix();
         popStyle();
-        //saveFrame("moviesVis3.JPG");
+        //saveFrame("moviesVis4-1.JPG");
         break;
         
       default: break;
@@ -73,7 +82,6 @@ void setup() {
   fill(150);
   frameInfo.timeLine();
   popStyle();
-  //saveFrame("moviesByYear.JPG");
 }
 
 void draw() {
@@ -84,8 +92,9 @@ void keyPressed() {
   switch (keyCode) {
     case UP: sortView = sortView + 1;
     setup();
-    //saveFrame("moviesVis"+sortView+".JPG");
-    //println(sortView);
+    if (sortView == 3) {
+      saveFrame("moviesVis"+sortView+"-3.JPG");
+    }
     break;
     case DOWN: sortView = sortView -1;
     setup();

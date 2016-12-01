@@ -5,7 +5,7 @@ static class Calculate {
   Calculate() {
   }
   
-  HashMap<Integer, Integer> moviesByYear(Table movies) {
+  static HashMap<Integer, Integer> moviesByYear(Table movies) {
     HashMap<Integer, Integer> result = new HashMap<Integer, Integer>();
     for (TableRow row : movies.rows()) {
       if (result.get(row.getInt("year")) == null) {
