@@ -20,37 +20,38 @@ import java.io.IOException;
             int yearSpan;
 
             try {
-
                 br = new BufferedReader(new FileReader(csvFile));
-//                int counter = 0;
                 while ((line = br.readLine()) != null) {
-                    // use comma as separator
                     String[] entry = line.split(csvSplitBy);
-                    int titleLength = entry[1].length();
-                    if (titleLength > 6) {
-//                        System.out.println(entry[1].substring(titleLength - 5, titleLength-1));
+//                    System.out.println(line);
 
-                        String year = entry[1].substring(titleLength - 5, titleLength-1);
-                        try {
-//                            System.out.println(Integer.valueOf(year));
-                            int yearInt = Integer.valueOf(year);
-                            line += ","+ yearInt;
-                            yearMin = Math.min(yearInt, yearMin);
-
-//                            entry[1] = entry[1].replace(year,"");
-//                            entry[1] = entry[1].substring(titleLength-5);
-                        } catch (NumberFormatException e) {
-//                            System.out.println("N/A");
-                            line += ",N/A";
+                    int titleLength = 0;
+                    String year = "";
+                    // the element is not from the first row
+                    try {
+                        // IF THERE IS A COMMA IN THE TITLE, CHECK THE SECOND INDEX
+                        // THIS DOES NOT ACCOUNT FOR TITLES WITH MORE THAN 2 COMMAS
+                        if (entry[1].substring(0, 1).equals("\"")) {
+                            titleLength = entry[2].length();
+                            if (titleLength >= 6) {
+                                year = entry[2].substring(titleLength - 6, titleLength - 2);
+                            }
+                        } else if (entry[1].length() > 6) {
+                            titleLength = entry[1].length();
+                            year = entry[1].substring(titleLength - 5, titleLength - 1);
                         }
+                        int yearInt = Integer.valueOf(year);
+                        line += "," + yearInt;
+                        yearMin = Math.min(yearInt, yearMin);
+                    } catch (NumberFormatException e) {
+                        line += ",N/A";
+//                            line += ","+ yearInt;
                     }
                     System.out.println(line);
                 }
                 yearSpan = 2016 - yearMin;
-//                System.out.println(counter);
-                System.out.println(yearMin);
-                System.out.println(yearSpan);
-
+//                System.out.println(yearMin);
+//                System.out.println(yearSpan);
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

@@ -39,7 +39,7 @@ public class Merge {
                 // use comma as separator
                 String[] entry = line2.split(csvSplitBy);
 
-                line2 += "," + ratingMap.getOrDefault(entry[0], "N/A,N/A");
+                line2 += "," + ratingMap.getOrDefault(entry[0], "0,0");
 
                 System.out.println(line2);
             }
