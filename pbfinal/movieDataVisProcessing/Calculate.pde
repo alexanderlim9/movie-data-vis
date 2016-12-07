@@ -5,6 +5,7 @@ static class Calculate {
   Calculate() {
   }
   
+  // stores number of movies by year
   static HashMap<Integer, Integer> moviesByYear(Table movies) {
     HashMap<Integer, Integer> result = new HashMap<Integer, Integer>();
     for (TableRow row : movies.rows()) {

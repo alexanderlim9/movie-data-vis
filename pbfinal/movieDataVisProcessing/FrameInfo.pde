@@ -40,6 +40,15 @@ class FrameInfo {
   void title3() {
     textAlign(CENTER);
     text("Number of Movies by Year", width/2, height + 25);
+    pushStyle();
+    stroke(.5);
+    stroke(100, 40);
+    for (int i = 1; i < 10; i++) {
+      //line(0, height-275*1.5-40, width, height-275*1.5-40);
+      text(i*100, 0, height-i*150-40);
+      line(0, height-i*150-40, width, height-i*150-40);
+    }
+    popStyle();
   }
   
   void title4() {

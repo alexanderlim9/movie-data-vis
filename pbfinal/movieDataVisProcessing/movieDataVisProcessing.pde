@@ -19,7 +19,6 @@ boolean isDrama = false;
 
 int numMovies;
 
-
 void setup() {
   //size(1200, 800);
   fullScreen(OPENGL);
@@ -172,9 +171,8 @@ void setup() {
       frameInfo.title4();
       break;
     default: break;
-}
+  }
   popStyle();
-
 }
 
 void draw() {
