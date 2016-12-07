@@ -2,8 +2,10 @@
 
 class Plot {
   float x, y, r;
+  String t;
   
-  Plot(float xpos, float ypos, float r) {
+  Plot(String title, float xpos, float ypos, float r) {
+    this.t = title;
     this.x = xpos;
     this.y = ypos;
     this.r = r;
