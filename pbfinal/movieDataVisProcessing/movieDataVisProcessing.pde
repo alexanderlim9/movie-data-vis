@@ -9,9 +9,15 @@ FrameInfo frameInfo = new FrameInfo();
 HashMap<Integer, Integer> moviesByYear;
 ArrayList<Plot> plots = new ArrayList<Plot>();
 
-boolean isAction = false;
+boolean isAction = true;
 boolean isAdventure = false;
+boolean isAnimation = false;
 boolean isComedy = false;
+boolean isCrime = false;
+boolean isChildren = false;
+boolean isDrama = false;
+
+int numMovies;
 
 
 void setup() {
@@ -39,7 +45,7 @@ void setup() {
     int y = row.getInt("year");
     float rating = row.getFloat("rating");
     int numParticipants = row.getInt("numParticipants");
-    int numMovies = movies.getRowCount();
+    numMovies = movies.getRowCount();
     String primaryGenre = row.getString("genre1");
     
     //plots = new ArrayList<Plot>();
@@ -109,23 +115,40 @@ void setup() {
         
       case 4:
         pushStyle();
-        
         plots.clear();
         plots.add(new Plot(title, yearX, random(height-40), width/200));
         for (Plot p: plots) {
           if (primaryGenre.equals("Action") && isAction) {
-            fill(255, 0, 0, 100);
+            fill(255, 20, 60, 100);
             p.render();
           }
           if (primaryGenre.equals("Adventure") && isAdventure) {
-            fill(0, 0, 255, 100);
+            fill(50, 0, 255, 100);
+            p.render();
+          }
+          if (primaryGenre.equals("Animation") && isAnimation) {
+            fill(85, 180, 50, 100);
+            p.render();
+          }
+          if (primaryGenre.equals("Comedy") && isComedy) {
+            fill(255, 180, 0, 100);
+            p.render();
+          }
+          if (primaryGenre.equals("Crime") && isCrime) {
+            fill(150, 140, 140, 100);
+            p.render();
+          }
+         if (primaryGenre.equals("Children") && isChildren) {
+            fill(64, 224, 208, 100);
+            p.render();
+          }
+         if (primaryGenre.equals("Drama") && isDrama) {
+            fill(128, 0, 128, 100);
             p.render();
           }
         }
-        popStyle();
-        text("Action", width/2, height/2);
-        text("Adventure", width/2+30, height/2);
 
+        popStyle();
         //saveFrame("moviesVis1.JPG");
         //println(y);
         break;
@@ -136,6 +159,20 @@ void setup() {
   pushStyle();
   fill(150);
   frameInfo.timeLine();
+  switch (sortView % 5) {
+    case 0: frameInfo.title0();
+      break;
+    case 1: frameInfo.title1();
+      break;
+    case 2: frameInfo.title2();
+      break;
+    case 3: frameInfo.title3();
+      break;
+    case 4: frameInfo.genreKey();
+      frameInfo.title4();
+      break;
+    default: break;
+}
   popStyle();
 
 }
@@ -143,15 +180,19 @@ void setup() {
 void draw() {
   //background(255);
     
-    
-    //for (Plot p: plots) {
-    //  //p.render();
-    //    if (mousePressed && mouseX > p.x && mouseX < p.x+p.r*2
-    //        && mouseY > p.y && mouseY < p.y+p.r*2) {
-    //      text(p.t, width/2, height/2);
-    //      println("you did it");
-    //    }
-    //}
+  //println(plots.size());
+  //for (int i = 0; i < numMovies; i++) {
+    //println("there's a plot");
+    //p.render();
+      //if (mousePressed && mouseX > p.x && mouseX < p.x+p.r*2
+      //    && mouseY > p.y && mouseY < p.y+p.r*2) {
+      //  text(p.t, width/2, height/2);
+      //  println("you did it");
+      //}
+      
+    //plots.get(i);
+    //plots.get(i).render();
+  //}
 }
 
 void keyPressed() {
@@ -170,7 +211,6 @@ void keyPressed() {
     default: break;
   }
   switch (key) {
-    
     case '1': isAction = !isAction;
       setup();
       sortView = 4;
@@ -179,7 +219,25 @@ void keyPressed() {
       setup();
       sortView = 4;
       break;
-    case '3': isComedy = !isComedy;
+    case '3': isAnimation = !isAnimation;
+      setup();
+      sortView = 4;
+      break;    
+    case '4': isComedy = !isComedy;
+      setup();
+      sortView = 4;
+      break;
+    case '5': isCrime = !isCrime;
+      setup();
+      sortView = 4;
+      break;
+    case '6': isChildren = !isChildren;
+      setup();
+      sortView = 4;
+      break;
+    case '7': isDrama = !isDrama;
+      setup();
+      sortView = 4;
       break;
     default: break;
   }
