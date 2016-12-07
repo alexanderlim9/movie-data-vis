@@ -10,7 +10,7 @@ HashMap<Integer, Integer> moviesByYear;
 
 void setup() {
   //size(1200, 800);
-  fullScreen();
+  fullScreen(OPENGL);
   background(255);
   movies = loadTable("parsedMovieData.csv", "header");
   moviesByYear = Calculate.moviesByYear(movies);
@@ -21,6 +21,8 @@ void setup() {
   //ratings  = loadTable("parsedRatings.csv", "header");
   
   //println(movies.getRowCount() + " total rows in table"); 
+
+
   for (TableRow row : movies.rows()) {
     
     int id = row.getInt("movieId");
@@ -30,6 +32,8 @@ void setup() {
     int numParticipants = row.getInt("numParticipants");
     int numMovies = movies.getRowCount();
     
+    ArrayList<Plot> plots = new ArrayList<Plot>();
+    
     //println(y);
     fill(0, 20);
     noStroke();
@@ -38,17 +42,29 @@ void setup() {
     
     
     switch (Math.abs(sortView % 4)) {
-      case 0: ellipse(yearX, random(height-40), width/100, width/100);
+      case 0:
+        plots.clear();
+        plots.add(new Plot(yearX, random(height-40), width/200));
+        for (Plot p: plots) {
+          p.render();
+        }
+        
+        //if (mouseX > yearX && mouseX < yearX+width/100
+        //    && mouseY > )
         //saveFrame("moviesVis1.JPG");
-        println(y);
+        //println(y);
         break;
 
       case 1: 
-      //case 2: ellipse(x, random(height), rating*3, rating*3);
         pushStyle();
-        //fill(150+rating*10, 100+rating*20, 150);
         fill(0, rating*20);
-        ellipse(yearX, random(height-40), width/100, width/100);
+        //rect(yearX, random(height-40), width/100, width/180);
+        
+        plots.clear();
+        plots.add(new Plot(yearX, random(height-40), width/200));
+        for (Plot p: plots) {
+          p.render();
+        }
         popStyle();
         //saveFrame("moviesVis2.JPG");
         break;
@@ -57,15 +73,22 @@ void setup() {
         pushStyle();
         //fill(150+rating*10, 100+rating*20, 150);
         fill(0, 20);
-        ellipse(yearX, random(height-40), numParticipants, numParticipants);
+        //ellipse(yearX, random(height-40), numParticipants, numParticipants);
+        plots.clear();
+        plots.add(new Plot(yearX, random(height-40), numParticipants/2));
+        for (Plot p: plots) {
+          p.render();
+        }
         popStyle();
         //saveFrame("moviesVis3.JPG");
         break;
         
       case 3:
+        frameInfo.measures();
         pushStyle();
         //fill(150+rating*10, 100+rating*20, 150);
         fill(200);
+
         pushMatrix();
         translate(0, -40);
         rect(yearX, height-moviesByYear.get(y)*1.5, width/110, moviesByYear.get(y)*1.5);
@@ -86,6 +109,8 @@ void setup() {
 
 void draw() {
   //background(255);
+    camera(width/2.0, height/2.0, (height/2.0) / tan(PI*30.0 / 180.0) + 20, width/2.0, height/2.0, 0, 0, 1, 0);
+
 }
 
 void keyPressed() {
