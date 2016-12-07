@@ -158,7 +158,7 @@ void setup() {
   pushStyle();
   fill(150);
   frameInfo.timeLine();
-  switch (sortView % 5) {
+  switch (Math.abs(sortView % 5)) {
     case 0: frameInfo.title0();
       break;
     case 1: frameInfo.title1();

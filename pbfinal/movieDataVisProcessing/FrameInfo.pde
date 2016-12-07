@@ -13,6 +13,7 @@ class FrameInfo {
       popMatrix();
       //text(Integer.toString(1916 + x*10), x*(width/10), height);
     }
+    text("Number of Movies: 9126", width-100, height + 25);
   }
   
   void measures() {
@@ -59,13 +60,13 @@ class FrameInfo {
   void genreKey() {
     pushStyle();
     fill(150);
-    text("Action", 0, height-140);
-    text("Adventure", 0, height-140+15);
-    text("Animation", 0, height-140+15*2);
-    text("Comedy", 0, height-140+15*3);
-    text("Crime", 0, height-140+15*4);
-    text("Children", 0, height-140+15*5);
-    text("Drama", 0, height-140+15*6);
+    text("1-Action", 0, height-140);
+    text("2-Adventure", 0, height-140+15);
+    text("3-Animation", 0, height-140+15*2);
+    text("4-Comedy", 0, height-140+15*3);
+    text("5-Crime", 0, height-140+15*4);
+    text("6-Children", 0, height-140+15*5);
+    text("7-Drama", 0, height-140+15*6);
     
     fill(255, 20, 60, 100);
     rect(-15, height-150, 10, 10);
